@@ -1,0 +1,125 @@
+:root {
+  --blackish: #222;
+  --whiteish: #e5e5e5;
+  --red: #ff5e56;
+  --yellow: #ffbd2e;
+  --green: #27c93f;
+  --backgroundSize: 300px;
+}
+
+.get-started-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #000;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  padding: 2rem;
+  background-image: url(https://img.freepik.com/free-vector/seamless-pattern_1159-5086.jpg?size=626&ext=jpg); /* Replace with your image if needed */
+  background-size: var(--backgroundSize);
+  animation: movingBackground 5s linear infinite;
+  position: relative;
+}
+
+.get-started-container:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1;
+  top: 0;
+  left: 0;
+}
+
+@keyframes movingBackground {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: var(--backgroundSize) var(--backgroundSize);
+  }
+}
+
+.fan-art {
+  width: 294px;
+  height: 294px;
+  z-index: 2;
+}
+
+.content-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  background-color: rgba(20, 20, 20, 0.7);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 0 5px #8b00ff, 0 0 10px #8b00ff, 0 0 15px #8b00ff,
+    0 0 20px #8b00ff;
+  animation: neon-effect 1.5s infinite alternate;
+  z-index: 2;
+}
+
+.welcome-text {
+  font-size: 29px;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.anivault-text {
+  color: #c938ec;
+}
+
+.description-text {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  margin-bottom: 3rem;
+  max-width: 400px;
+}
+
+.get-started-button {
+  background-color: #fff;
+  color: #000;
+  border: 1.5px solid #8a2be2;
+  border-radius: 17px;
+  padding: 1rem 2rem;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0.16em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.get-started-button:hover {
+  transform: scale(1.05);
+}
+
+@keyframes neon-effect {
+  0% {
+    box-shadow: 0 0 5px #8b00ff, 0 0 10px #8b00ff, 0 0 15px #8b00ff,
+      0 0 20px #8b00ff;
+  }
+  50% {
+    box-shadow: 0 0 10px #8b00ff, 0 0 20px #8b00ff, 0 0 30px #8b00ff,
+      0 0 40px #8b00ff;
+  }
+  100% {
+    box-shadow: 0 0 5px #8b00ff, 0 0 10px #8b00ff, 0 0 15px #8b00ff,
+      0 0 20px #8b00ff;
+  }
+}
+
+@media (max-width: 768px) {
+  .content-box {
+    width: 90%;
+    padding: 1.5rem;
+  }
+}

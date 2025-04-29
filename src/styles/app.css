@@ -1,0 +1,16 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@font-face {
+  font-family: "Japan Bento";
+  src: url("/fonts/japan-bento.woff2") format("woff2"),
+    url("/fonts/japan-bento.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
