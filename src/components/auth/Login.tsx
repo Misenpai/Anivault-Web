@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import anivaultLogo from "../../../public/assets/anivault_logo.png";
 import "../../styles/login.css";
-import "../../styles/commonbackground.css";
 import RevolvingProgressBar from "../RevolvingProgressBar";
 import { useNavigate } from "react-router";
 
@@ -30,7 +29,7 @@ const Login = () => {
   };
 
   return (
-    <div className="backgound-common-container">
+    <>
       <div className="login-content">
         <img src={anivaultLogo} alt="Anivault Logo" className="logo" />
         <div className="content-box-login">
@@ -68,7 +67,7 @@ const Login = () => {
         </div>
         {isLoading && <RevolvingProgressBar />}
       </div>
-    </div>
+    </>
   );
 };
 

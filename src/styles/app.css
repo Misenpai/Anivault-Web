@@ -4,8 +4,8 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
+  overflow-x: hidden;
 }
-
 
 @font-face {
   font-family: "Japan Bento";
@@ -14,4 +14,65 @@ body {
   font-weight: normal;
   font-style: normal;
   font-display: swap;
+}
+
+:root {
+  --blackish: #222;
+  --whiteish: #e5e5e5;
+  --red: #ff5e56;
+  --yellow: #ffbd2e;
+  --green: #27c93f;
+  --backgroundSize: 300px;
+}
+
+.app-background {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.background-common-container {
+  position: repeat;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  background-image: url(https://img.freepik.com/free-vector/seamless-pattern_1159-5086.jpg?size=626&ext=jpg);
+  background-size: var(--backgroundSize);
+  animation: movingBackground 5s linear infinite;
+  overflow: auto;
+}
+
+.background-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1;
+  top: 0;
+  left: 0;
+}
+
+.routes-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+@keyframes movingBackground {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: var(--backgroundSize) var(--backgroundSize);
+  }
 }

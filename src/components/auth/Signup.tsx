@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import anivaultLogo from "../../../public/assets/anivault_logo.png";
 import RevolvingProgressBar from "../RevolvingProgressBar";
 import "../../styles/signup.css";
-import "../../styles/commonbackground.css";
 import { useNavigate } from "react-router";
+import { motion } from "framer-motion";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [checkPassword, setCheckPassword] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [checkPassword, setCheckPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,10 +35,36 @@ const Signup = () => {
   };
 
   return (
-    <div className="backgound-common-container">
-      <div className="signup-content">
-        <img src={anivaultLogo} alt="Anivault Logo" className="signup-logo" />
-        <div className="content-box-signup">
+    <motion.div
+      className="signup-container"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{
+        opacity: 0,
+        x: "100vw",
+        transition: { duration: 0.5 },
+      }}
+    >
+      <motion.div
+        className="signup-content"
+        initial={{ x: "100vw" }}
+        animate={{ x: 0 }}
+        transition={{ type: "spring", stiffness: 120 }}
+      >
+        <motion.img
+          src={anivaultLogo}
+          alt="Anivault Logo"
+          className="signup-logo"
+          initial={{ x: "100vw" }}
+          animate={{ x: 0 }}
+          transition={{ type: "spring", stiffness: 120, delay: 0.2 }}
+        />
+        <motion.div
+          className="content-box-signup"
+          initial={{ x: "100vw" }}
+          animate={{ x: 0 }}
+          transition={{ type: "spring", stiffness: 120, delay: 0.3 }}
+        >
           <h1 className="signup-welcome">
             Become a Senpai <span className="anivault-text">Today !</span>
           </h1>
@@ -81,10 +107,10 @@ const Signup = () => {
               Have an account? <a onClick={handleLoginNavigation}>Login</a>
             </p>
           </form>
-        </div>
+        </motion.div>
         {isLoading && <RevolvingProgressBar />}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
