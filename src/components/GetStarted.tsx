@@ -1,17 +1,17 @@
 import React from "react";
 import "../styles/getstarted.css";
+import "../styles/commonbackground.css"
 import fanart from "../../public/assets/fan_art_removebg.png";
 import { useNavigate } from "react-router";
 
 const GetStarted = () => {
   const navigate = useNavigate();
-
   const handleGetStarted = () => {
     navigate("/signup");
   };
 
   return (
-    <div className="get-started-container">
+    <div className="backgound-common-container">
       <img src={fanart} alt="Anivault Fan Art" className="fan-art" />
       <div className="content-box">
         <h1 className="welcome-text">

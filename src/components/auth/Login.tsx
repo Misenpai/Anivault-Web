@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import anivaultLogo from "../../../public/assets/anivault_logo.png";
 import "../../styles/login.css";
+import "../../styles/commonbackground.css";
 import RevolvingProgressBar from "../RevolvingProgressBar";
+import { useNavigate } from "react-router";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -22,8 +25,12 @@ const Login = () => {
     }
   };
 
+  const handleSignupNavigation = () => {
+    navigate("/signup");
+  };
+
   return (
-    <div className="login-container">
+    <div className="backgound-common-container">
       <div className="login-content">
         <img src={anivaultLogo} alt="Anivault Logo" className="logo" />
         <div className="content-box-login">
@@ -55,9 +62,7 @@ const Login = () => {
 
             <p className="signup-link">
               Don't have an account?{" "}
-              <a href="/signup">
-                Signup
-              </a>
+              <a onClick={handleSignupNavigation}>Signup</a>
             </p>
           </form>
         </div>
