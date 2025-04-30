@@ -1,12 +1,3 @@
-:root {
-  --blackish: #222;
-  --whiteish: #e5e5e5;
-  --red: #ff5e56;
-  --yellow: #ffbd2e;
-  --green: #27c93f;
-  --backgroundSize: 300px;
-}
-
 .get-started-container {
   display: flex;
   flex-direction: column;
@@ -37,12 +28,10 @@
   padding: 2rem;
   margin: 0 auto;
   text-align: center;
-  box-shadow: 0 0 5px #8b00ff, 0 0 10px #8b00ff, 0 0 15px #8b00ff,
-    0 0 20px #8b00ff;
+  box-shadow: 0 0 5px #8b00ff, 0 0 10px #8b00ff, 0 0 15px #8b00ff, 0 0 20px #8b00ff;
   animation: neon-effect 1.5s infinite alternate;
   z-index: 2;
   position: relative;
-  overflow: visible;
 }
 
 .welcome-text {
@@ -86,17 +75,11 @@
 }
 
 @keyframes neon-effect {
-  0% {
-    box-shadow: 0 0 5px #8b00ff, 0 0 10px #8b00ff, 0 0 15px #8b00ff,
-      0 0 20px #8b00ff;
+  0%, 100% {
+    box-shadow: 0 0 5px #8b00ff, 0 0 10px #8b00ff, 0 0 15px #8b00ff, 0 0 20px #8b00ff;
   }
   50% {
-    box-shadow: 0 0 10px #8b00ff, 0 0 20px #8b00ff, 0 0 30px #8b00ff,
-      0 0 40px #8b00ff;
-  }
-  100% {
-    box-shadow: 0 0 5px #8b00ff, 0 0 10px #8b00ff, 0 0 15px #8b00ff,
-      0 0 20px #8b00ff;
+    box-shadow: 0 0 10px #8b00ff, 0 0 20px #8b00ff, 0 0 30px #8b00ff, 0 0 40px #8b00ff;
   }
 }
 

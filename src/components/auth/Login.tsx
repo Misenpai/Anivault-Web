@@ -2,13 +2,17 @@ import React, { useState } from "react";
 import anivaultLogo from "../../../public/assets/anivault_logo.png";
 import "../../styles/login.css";
 import RevolvingProgressBar from "../RevolvingProgressBar";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
+import { motion } from "framer-motion";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const location = useLocation();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const direction = location.state?.direction || "right";
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,14 +29,42 @@ const Login = () => {
   };
 
   const handleSignupNavigation = () => {
-    navigate("/signup");
+    navigate("/signup", { state: { direction: "right" }, replace: true });
   };
 
   return (
-    <>
-      <div className="login-content">
-        <img src={anivaultLogo} alt="Anivault Logo" className="logo" />
-        <div className="content-box-login">
+    <motion.div
+      className="login-container"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{
+        opacity: 0,
+        x: "100vw",
+        transition: { duration: 0.1, ease: "easeInOut" },
+      }}
+    >
+      <motion.div
+        className="auth-logo-container"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 1 }}
+      >
+        <img src={anivaultLogo} alt="Anivault Logo" className="login-logo" />
+      </motion.div>
+
+      <motion.div
+        className="login-content"
+        initial={{ x: direction === "left" ? "100vw" : "-100vw" }}
+        animate={{ x: 0 }}
+        transition={{ type: "spring", stiffness: 200, damping: 20 }}
+      >
+        <motion.div
+          className="content-box-login"
+          initial={{ x: direction === "left" ? "100vw" : "-100vw" }}
+          animate={{ x: 0 }}
+          exit={{ x: "100vw" }}
+          transition={{ type: "spring", stiffness: 200, damping: 20 }}
+        >
           <h1 className="login-welcome">
             Welcome back <span className="anivault-text">Senpai !!</span>
           </h1>
@@ -61,13 +93,23 @@ const Login = () => {
 
             <p className="signup-link">
               Don't have an account?{" "}
-              <a onClick={handleSignupNavigation}>Signup</a>
+              <span
+                onClick={handleSignupNavigation}
+                style={{
+                  cursor: "pointer",
+                  color: "#8a2be2",
+                  textDecoration: "underline",
+                  fontWeight: 600,
+                }}
+              >
+                Signup
+              </span>
             </p>
           </form>
-        </div>
+        </motion.div>
         {isLoading && <RevolvingProgressBar />}
-      </div>
-    </>
+      </motion.div>
+    </motion.div>
   );
 };
 

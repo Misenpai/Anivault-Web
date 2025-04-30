@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/getstarted.css";
 import fanart from "../../public/assets/fan_art_removebg.png";
-import { useNavigate } from "react-router"; // Fixed import to react-router-dom
+import { useNavigate } from "react-router";
 import { motion } from "framer-motion";
 
 const GetStarted = () => {

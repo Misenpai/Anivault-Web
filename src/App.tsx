@@ -4,7 +4,7 @@ import {
   Routes,
   Route,
   useLocation,
-} from "react-router"; // Fixed import to react-router-dom
+} from "react-router";
 import GetStarted from "./components/GetStarted";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";

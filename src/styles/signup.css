@@ -4,7 +4,21 @@
   --red: #ff5e56;
   --yellow: #ffbd2e;
   --green: #27c93f;
-  --backgroundSize: 300px;
+}
+
+.auth-logo-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+  z-index: 10;
+}
+
+.signup-logo {
+  width: 200px;
+  height: auto;
+  z-index: 2;
 }
 
 .signup-container {
@@ -45,13 +59,6 @@
   z-index: 2;
   position: relative;
   overflow: visible;
-}
-
-.signup-logo {
-  width: 200px;
-  height: auto;
-  margin-bottom: 50px;
-  z-index: 2;
 }
 
 .signup-welcome {
@@ -149,15 +156,4 @@
     width: 85%;
     padding: 1.5rem;
   }
-
-  .description-text {
-    font-size: 18px;
-  }
-}
-
-@font-face {
-  font-family: "Japan Bento";
-  src: local("Japan Bento"), url("path-to-your-font.woff2") format("woff2");
-  font-weight: normal;
-  font-style: normal;
 }

@@ -31,7 +31,7 @@ const Signup = () => {
   };
 
   const handleLoginNavigation = () => {
-    navigate("/login");
+    navigate("/login", { state: { direction: "left" }, replace: true });
   };
 
   return (
@@ -41,29 +41,31 @@ const Signup = () => {
       animate={{ opacity: 1 }}
       exit={{
         opacity: 0,
-        x: "100vw",
-        transition: { duration: 0.5 },
+        x: "-100vw",
+        transition: { duration: 0.1, ease: "easeInOut" },
       }}
     >
+      <motion.div
+        className="auth-logo-container"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 1 }}
+      >
+        <img src={anivaultLogo} alt="Anivault Logo" className="signup-logo" />
+      </motion.div>
+
       <motion.div
         className="signup-content"
         initial={{ x: "100vw" }}
         animate={{ x: 0 }}
-        transition={{ type: "spring", stiffness: 120 }}
+        transition={{ type: "spring", stiffness: 200, damping: 20 }}
       >
-        <motion.img
-          src={anivaultLogo}
-          alt="Anivault Logo"
-          className="signup-logo"
-          initial={{ x: "100vw" }}
-          animate={{ x: 0 }}
-          transition={{ type: "spring", stiffness: 120, delay: 0.2 }}
-        />
         <motion.div
           className="content-box-signup"
           initial={{ x: "100vw" }}
           animate={{ x: 0 }}
-          transition={{ type: "spring", stiffness: 120, delay: 0.3 }}
+          exit={{ x: "-100vw" }}
+          transition={{ type: "spring", stiffness: 200, damping: 20 }}
         >
           <h1 className="signup-welcome">
             Become a Senpai <span className="anivault-text">Today !</span>
@@ -104,7 +106,18 @@ const Signup = () => {
               SIGN UP
             </button>
             <p className="login-link">
-              Have an account? <a onClick={handleLoginNavigation}>Login</a>
+              Have an account?{" "}
+              <span
+                onClick={handleLoginNavigation}
+                style={{
+                  cursor: "pointer",
+                  color: "#8a2be2",
+                  textDecoration: "underline",
+                  fontWeight: 600,
+                }}
+              >
+                Login
+              </span>
             </p>
           </form>
         </motion.div>
