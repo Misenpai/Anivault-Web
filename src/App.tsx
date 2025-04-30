@@ -10,6 +10,7 @@ import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import "./styles/app.css";
 import { AnimatePresence } from "framer-motion";
+import Home from "./components/ui/Home";
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -20,6 +21,7 @@ const AnimatedRoutes = () => {
         <Route path="/" element={<GetStarted />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/home" element={<Home />} />
       </Routes>
     </AnimatePresence>
   );

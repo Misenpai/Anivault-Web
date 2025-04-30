@@ -132,6 +132,11 @@
   font-weight: 600;
 }
 
+.error-message {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
 @font-face {
   font-family: "Japan Bento";
   src: local("Japan Bento"), url("path-to-your-font.woff2") format("woff2");
