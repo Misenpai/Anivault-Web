@@ -18,11 +18,7 @@ const Signup = () => {
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
-<<<<<<< HEAD
-      navigate("/main", { replace: true });
-=======
       navigate("/home", { replace: true });
->>>>>>> temp-branch
     }
   }, [navigate]);
 
@@ -41,7 +37,6 @@ const Signup = () => {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
-<<<<<<< HEAD
 
     if (!name || !email || !password || !checkPassword) {
       setError("All fields are required");
@@ -60,8 +55,6 @@ const Signup = () => {
       setIsLoading(false);
       return;
     }
-=======
->>>>>>> temp-branch
 
     if (!name || !email || !password || !checkPassword) {
       setError("All fields are required");
@@ -111,11 +104,7 @@ const Signup = () => {
       localStorage.setItem("user", JSON.stringify(user));
       setIsLoading(false);
       alert(`${user.name} is Signed up`);
-<<<<<<< HEAD
-=======
       navigate("/home", { replace: true });
->>>>>>> temp-branch
-      navigate("/main", { replace: true });
     } catch (error: unknown) {
       setIsLoading(false);
       let message = "Signup failed";
@@ -127,10 +116,7 @@ const Signup = () => {
       } else {
         setError(message);
       }
-<<<<<<< HEAD
-=======
       console.log("Signup error:", error);
->>>>>>> temp-branch
     }
   };
 
