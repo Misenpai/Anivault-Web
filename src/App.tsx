@@ -11,6 +11,7 @@ import Signup from "./components/auth/Signup";
 import Main from "./components/Main";
 import "./styles/app.css";
 import { AnimatePresence } from "framer-motion";
+import Home from "./components/ui/Home";
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -21,7 +22,11 @@ const AnimatedRoutes = () => {
         <Route path="/" element={<GetStarted />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+<<<<<<< HEAD
         <Route path="/main" element={<Main />} />
+=======
+        <Route path="/home" element={<Home />} />
+>>>>>>> temp-branch
       </Routes>
     </AnimatePresence>
   );

@@ -5,6 +5,10 @@ import RevolvingProgressBar from "../RevolvingProgressBar";
 import { useNavigate, useLocation } from "react-router";
 import { motion } from "framer-motion";
 import { userLogin } from "../../services/api";
+<<<<<<< HEAD
+=======
+import { AxiosError } from "axios";
+>>>>>>> temp-branch
 
 const Login = () => {
   const navigate = useNavigate();
@@ -19,6 +23,10 @@ const Login = () => {
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
+<<<<<<< HEAD
+=======
+      navigate("/home", { replace: true });
+>>>>>>> temp-branch
       navigate("/main", { replace: true });
     }
   }, [navigate]);
@@ -38,6 +46,7 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
+<<<<<<< HEAD
 
     if (!email || !password) {
       setError("Invalid Email or Password");
@@ -50,7 +59,20 @@ const Login = () => {
       setIsLoading(false);
       return;
     }
+=======
+>>>>>>> temp-branch
 
+    if (!email || !password) {
+      setError("Invalid Email or Password");
+      setIsLoading(false);
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      setError("Not a valid email address");
+      setIsLoading(false);
+      return;
+    }
     try {
       const response = await userLogin(email, password);
       const user = {
@@ -62,12 +84,28 @@ const Login = () => {
       localStorage.setItem("user", JSON.stringify(user));
       setIsLoading(false);
       alert(`${user.name} is Logged in`);
+<<<<<<< HEAD
       navigate("/main", { replace: true });
     } catch (error: unknown) {
       setIsLoading(false);
       const message =
         error instanceof Error ? error.message : "Invalid Email or Password";
       setError(message);
+=======
+      navigate("/home", { replace: true });
+    } catch (error: unknown) {
+      setIsLoading(false);
+      if (error instanceof AxiosError) {
+        if (!error.response) {
+          setError("Network error - check CORS configuration");
+        } else {
+          setError(error.response.data?.message || "Login failed");
+        }
+      } else {
+        setError("Unexpected error occurred");
+      }
+      navigate("/main", { replace: true });
+>>>>>>> temp-branch
     }
   };
 

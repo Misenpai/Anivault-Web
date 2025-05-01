@@ -18,7 +18,11 @@ const Signup = () => {
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
+<<<<<<< HEAD
       navigate("/main", { replace: true });
+=======
+      navigate("/home", { replace: true });
+>>>>>>> temp-branch
     }
   }, [navigate]);
 
@@ -37,6 +41,27 @@ const Signup = () => {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
+<<<<<<< HEAD
+
+    if (!name || !email || !password || !checkPassword) {
+      setError("All fields are required");
+      setIsLoading(false);
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      setError("Not a valid email address");
+      setIsLoading(false);
+      return;
+    }
+
+    if (password !== checkPassword) {
+      setError("Passwords do not match");
+      setIsLoading(false);
+      return;
+    }
+=======
+>>>>>>> temp-branch
 
     if (!name || !email || !password || !checkPassword) {
       setError("All fields are required");
@@ -56,6 +81,25 @@ const Signup = () => {
       return;
     }
 
+    if (!name || !email || !password || !checkPassword) {
+      setError("All fields are required");
+      setIsLoading(false);
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      setError("Not a valid email address");
+      setIsLoading(false);
+      return;
+    }
+
+    if (password !== checkPassword) {
+      setError("Passwords do not match");
+      setIsLoading(false);
+      return;
+    }
+
+    console.log("Signup payload:", { name, email, password });
     try {
       const response = await userSignup(name, email, password);
       const user = {
@@ -67,6 +111,10 @@ const Signup = () => {
       localStorage.setItem("user", JSON.stringify(user));
       setIsLoading(false);
       alert(`${user.name} is Signed up`);
+<<<<<<< HEAD
+=======
+      navigate("/home", { replace: true });
+>>>>>>> temp-branch
       navigate("/main", { replace: true });
     } catch (error: unknown) {
       setIsLoading(false);
@@ -79,6 +127,10 @@ const Signup = () => {
       } else {
         setError(message);
       }
+<<<<<<< HEAD
+=======
+      console.log("Signup error:", error);
+>>>>>>> temp-branch
     }
   };
 
