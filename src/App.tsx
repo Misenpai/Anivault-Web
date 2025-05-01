@@ -18,7 +18,6 @@ import "./styles/app.css";
 import Search from "./components/ui/search/Search";
 import Library from "./components/ui/library/Library";
 
-// Route guard component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const user = JSON.parse(localStorage.getItem("user") || "{}");
   if (!user || !user.token) {
@@ -27,7 +26,6 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;
 };
 
-// Animated route wrapper
 const AnimatedRoutes = () => {
   const location = useLocation();
 

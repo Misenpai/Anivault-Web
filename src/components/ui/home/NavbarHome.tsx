@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import "./style/navbarhome.css";
 
-const NavbarHome = () => {
-  const [activeTab, setActiveTab] = useState("This Season");
+interface NavbarHomeProps {
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+}
 
+const NavbarHome: React.FC<NavbarHomeProps> = ({ activeTab, setActiveTab }) => {
   return (
     <div className="nav-wrapper">
       <div className="nav-option" onClick={() => setActiveTab("Last")}>
