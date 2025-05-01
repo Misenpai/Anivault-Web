@@ -56,6 +56,24 @@ const Signup = () => {
       return;
     }
 
+    if (!name || !email || !password || !checkPassword) {
+      setError("All fields are required");
+      setIsLoading(false);
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      setError("Not a valid email address");
+      setIsLoading(false);
+      return;
+    }
+
+    if (password !== checkPassword) {
+      setError("Passwords do not match");
+      setIsLoading(false);
+      return;
+    }
+
     console.log("Signup payload:", { name, email, password });
     try {
       const response = await userSignup(name, email, password);
@@ -69,6 +87,7 @@ const Signup = () => {
       setIsLoading(false);
       alert(`${user.name} is Signed up`);
       navigate("/home", { replace: true });
+      navigate("/main", { replace: true });
     } catch (error: unknown) {
       setIsLoading(false);
       let message = "Signup failed";

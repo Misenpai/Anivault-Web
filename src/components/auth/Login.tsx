@@ -21,6 +21,7 @@ const Login = () => {
     const user = localStorage.getItem("user");
     if (user) {
       navigate("/home", { replace: true });
+      navigate("/main", { replace: true });
     }
   }, [navigate]);
 
@@ -51,7 +52,6 @@ const Login = () => {
       setIsLoading(false);
       return;
     }
-
     try {
       const response = await userLogin(email, password);
       const user = {
@@ -75,6 +75,7 @@ const Login = () => {
       } else {
         setError("Unexpected error occurred");
       }
+      navigate("/main", { replace: true });
     }
   };
 
