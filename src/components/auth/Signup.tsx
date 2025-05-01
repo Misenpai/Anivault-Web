@@ -1,32 +1,84 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import anivaultLogo from "../../../public/assets/anivault_logo.png";
 import RevolvingProgressBar from "../RevolvingProgressBar";
 import "../../styles/signup.css";
 import { useNavigate } from "react-router";
 import { motion } from "framer-motion";
+import { userSignup } from "../../services/api";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [name, setName] = useState<string>("");
   const [checkPassword, setCheckPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      navigate("/main", { replace: true });
+    }
+  }, [navigate]);
+
+  const isValidEmail = (email: string): boolean => {
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return (
+      pattern.test(email) &&
+      (email.endsWith("@gmail.com") ||
+        email.endsWith("@hotmail.com") ||
+        email.endsWith("@yahoo.com") ||
+        email.endsWith("@outlook.com"))
+    );
+  };
 
   const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
+    setError(null);
+
+    if (!name || !email || !password || !checkPassword) {
+      setError("All fields are required");
+      setIsLoading(false);
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      setError("Not a valid email address");
+      setIsLoading(false);
+      return;
+    }
+
+    if (password !== checkPassword) {
+      setError("Passwords do not match");
+      setIsLoading(false);
+      return;
+    }
 
     try {
-      console.log("Signup attempted with: ", {
-        email,
-        password,
-        checkPassword,
-      });
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const response = await userSignup(name, email, password);
+      const user = {
+        id: response.result.payload.id,
+        name: response.result.payload.name,
+        email: response.result.payload.email,
+        token: response.token,
+      };
+      localStorage.setItem("user", JSON.stringify(user));
       setIsLoading(false);
-    } catch (error) {
+      alert(`${user.name} is Signed up`);
+      navigate("/main", { replace: true });
+    } catch (error: unknown) {
       setIsLoading(false);
-      console.error("Signup failed:", error);
+      let message = "Signup failed";
+      if (error instanceof Error) {
+        message = error.message;
+      }
+      if (message.includes("already exists")) {
+        setError("A user with this email or name already exists");
+      } else {
+        setError(message);
+      }
     }
   };
 
@@ -72,6 +124,14 @@ const Signup = () => {
           </h1>
           <form onSubmit={handleSignup} className="signup-form">
             <input
+              type="text"
+              className="signup-input"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+            <input
               type="email"
               className="signup-input"
               placeholder="Email"
@@ -79,7 +139,6 @@ const Signup = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-
             <input
               type="password"
               className="signup-input"
@@ -88,16 +147,19 @@ const Signup = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-
             <input
               type="password"
               className="signup-input"
-              placeholder="Check Password"
+              placeholder="Confirm Password"
               value={checkPassword}
               onChange={(e) => setCheckPassword(e.target.value)}
               required
             />
-
+            {error && (
+              <p className="error-message" style={{ color: "red" }}>
+                {error}
+              </p>
+            )}
             <button
               type="submit"
               className="signup-button"

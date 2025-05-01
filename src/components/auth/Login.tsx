@@ -1,30 +1,73 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import anivaultLogo from "../../../public/assets/anivault_logo.png";
 import "../../styles/login.css";
 import RevolvingProgressBar from "../RevolvingProgressBar";
 import { useNavigate, useLocation } from "react-router";
 import { motion } from "framer-motion";
+import { userLogin } from "../../services/api";
 
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   const direction = location.state?.direction || "right";
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      navigate("/main", { replace: true });
+    }
+  }, [navigate]);
+
+  const isValidEmail = (email: string): boolean => {
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return (
+      pattern.test(email) &&
+      (email.endsWith("@gmail.com") ||
+        email.endsWith("@hotmail.com") ||
+        email.endsWith("@yahoo.com") ||
+        email.endsWith("@outlook.com"))
+    );
+  };
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
+    setError(null);
+
+    if (!email || !password) {
+      setError("Invalid Email or Password");
+      setIsLoading(false);
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      setError("Not a valid email address");
+      setIsLoading(false);
+      return;
+    }
 
     try {
-      console.log("Login attempted with:", { email, password });
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const response = await userLogin(email, password);
+      const user = {
+        id: response.result.payload.id,
+        name: response.result.payload.name,
+        email: response.result.payload.email,
+        token: response.token,
+      };
+      localStorage.setItem("user", JSON.stringify(user));
       setIsLoading(false);
-    } catch (error) {
+      alert(`${user.name} is Logged in`);
+      navigate("/main", { replace: true });
+    } catch (error: unknown) {
       setIsLoading(false);
-      console.error("Login failed:", error);
+      const message =
+        error instanceof Error ? error.message : "Invalid Email or Password";
+      setError(message);
     }
   };
 
@@ -77,7 +120,6 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-
             <input
               type="password"
               className="login-input"
@@ -86,11 +128,14 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-
+            {error && (
+              <p className="error-message" style={{ color: "red" }}>
+                {error}
+              </p>
+            )}
             <button type="submit" className="login-button" disabled={isLoading}>
               LOGIN
             </button>
-
             <p className="signup-link">
               Don't have an account?{" "}
               <span

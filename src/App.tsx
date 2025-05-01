@@ -8,6 +8,7 @@ import {
 import GetStarted from "./components/GetStarted";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
+import Main from "./components/Main";
 import "./styles/app.css";
 import { AnimatePresence } from "framer-motion";
 
@@ -20,6 +21,7 @@ const AnimatedRoutes = () => {
         <Route path="/" element={<GetStarted />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/main" element={<Main />} />
       </Routes>
     </AnimatePresence>
   );
