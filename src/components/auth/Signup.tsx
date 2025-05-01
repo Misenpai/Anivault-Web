@@ -18,7 +18,7 @@ const Signup = () => {
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
-      navigate("/home", { replace: true });
+      navigate("/main/home", { replace: true });
     }
   }, [navigate]);
 
@@ -104,7 +104,7 @@ const Signup = () => {
       localStorage.setItem("user", JSON.stringify(user));
       setIsLoading(false);
       alert(`${user.name} is Signed up`);
-      navigate("/home", { replace: true });
+      navigate("/main/home", { replace: true });
     } catch (error: unknown) {
       setIsLoading(false);
       let message = "Signup failed";

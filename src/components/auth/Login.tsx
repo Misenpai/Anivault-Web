@@ -19,7 +19,7 @@ const Login = () => {
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
-      navigate("/home", { replace: true });
+      navigate("/main/home", { replace: true });
     }
   }, [navigate]);
 
@@ -73,13 +73,12 @@ const Login = () => {
       localStorage.setItem("user", JSON.stringify(user));
       setIsLoading(false);
       alert(`${user.name} is Logged in`);
-      navigate("/home", { replace: true });
+      navigate("/main/home", { replace: true });
     } catch (error: unknown) {
       setIsLoading(false);
       const message =
         error instanceof Error ? error.message : "Invalid Email or Password";
       setError(message);
-      navigate("/home", { replace: true });
     }
   };
 
