@@ -28,4 +28,17 @@ const getPreviousSeasonInfo = (): { season: string; year: number } => {
   }
 };
 
-export { getCurrentSeasonInfo, getPreviousSeasonInfo };
+const getNextSeasonInfo = (): { season: string; year: number } => {
+  const { season, year } = getCurrentSeasonInfo();
+  if (season === "winter") {
+    return { season: "spring", year };
+  } else if (season === "spring") {
+    return { season: "summer", year };
+  } else if (season === "summer") {
+    return { season: "fall", year };
+  } else {
+    return { season: "winter", year: year + 1 };
+  }
+};
+
+export { getCurrentSeasonInfo, getPreviousSeasonInfo, getNextSeasonInfo };
