@@ -1,4 +1,3 @@
-// src/components/ui/home/archive/ArchiveSelected.tsx
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import JIKAN_API_BASE_URL from "../../../config/configjikan";
@@ -53,7 +52,6 @@ const ArchiveSelected: React.FC = () => {
       }
       const json: ApiResponse = await response.json();
 
-      // Deduplicate by mal_id
       const map = new Map<number, Anime>();
       json.data.forEach((item) => {
         if (!map.has(item.mal_id)) {

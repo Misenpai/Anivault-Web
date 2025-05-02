@@ -1,4 +1,4 @@
-// src/components/ui/Main.tsx
+
 import React, { useState } from "react";
 import { Outlet, Navigate } from "react-router";
 import Header from "../ui/main/Header";

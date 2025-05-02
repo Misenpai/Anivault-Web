@@ -1,4 +1,3 @@
-// src/App.tsx
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -18,6 +17,7 @@ import "./styles/app.css";
 import Search from "./components/ui/search/Search";
 import Library from "./components/ui/library/Library";
 import ArchiveSelected from "./components/ui/home/ArchiveSelected";
+import AnimeDetail from "./components/AnimeDetails";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const user = JSON.parse(localStorage.getItem("user") || "{}");
@@ -51,6 +51,8 @@ const AnimatedRoutes = () => {
           <Route path="archive/:year/:season" element={<ArchiveSelected />} />
           <Route path="*" element={<Navigate to="/main" replace />} />
         </Route>
+        <Route path="/anime/:id" element={<AnimeDetail />} />
+
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </AnimatePresence>
