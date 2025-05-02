@@ -1,0 +1,83 @@
+/* Archive Container */
+.archive {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.archive-title {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+  display: block;
+}
+
+.season-year {
+  font-size: 1.8rem;
+  margin: 1.5rem 0;
+}
+
+.season-buttons {
+  display: flex;
+  justify-content: space-between; /* This will spread the buttons evenly */
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 2rem;
+  width: 100%; /* Ensure it takes full width */
+}
+
+/* Card-style buttons */
+.archive-button {
+  padding: 12px 24px;
+  background: #fff;
+  border: 3px solid #000;
+  box-shadow: 6px 6px 0 #9333ea;
+  transition: transform 0.3s, box-shadow 0.3s;
+  font-weight: bold;
+  text-transform: capitalize;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  min-width: 100px;
+  flex: 1; /* This makes buttons grow to fill available space */
+  max-width: calc(25% - 15px); /* 4 buttons per row with gap accounted for */
+}
+
+/* Rest of your existing button styles remain the same */
+.archive-button:hover:not(:disabled) {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0 #9333ea;
+}
+
+.archive-button:active:not(:disabled) {
+  transform: translate(0, 0);
+  box-shadow: 6px 6px 0 #000;
+}
+
+.archive-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  transform: translateY(100%);
+  transition: transform 0.3s;
+  z-index: -1;
+}
+
+.archive-button:hover:not(:disabled)::before {
+  transform: translateY(0);
+}
+
+.archive-button:hover:not(:disabled) {
+  color: #fff;
+}
+
+.archive-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}

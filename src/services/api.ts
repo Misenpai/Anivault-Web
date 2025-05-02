@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios";
-import config from "../config";
+import config from "../config/config";
 
 interface AuthResponse {
   token: string;
