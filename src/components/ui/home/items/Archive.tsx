@@ -19,7 +19,7 @@ const Archive = () => {
 
   const fetchSeasons = async () => {
     try {
-      await delay(1000); // Rate limit: 1s delay
+      await delay(1000);
       const url = `${JIKAN_API_BASE_URL.API_URL}/seasons`;
       const response = await fetch(url);
       if (!response.ok) {
@@ -51,7 +51,7 @@ const Archive = () => {
   }, []);
 
   const handleSeasonClick = (year: number, season: string) => {
-    navigate(`/archive/${year}/${season}`);
+    navigate(`/main/archive/${year}/${season}`);
   };
 
   if (loading) {

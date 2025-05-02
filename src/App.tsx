@@ -17,6 +17,7 @@ import Home from "./components/ui/home/Home";
 import "./styles/app.css";
 import Search from "./components/ui/search/Search";
 import Library from "./components/ui/library/Library";
+import ArchiveSelected from "./components/ui/home/ArchiveSelected";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const user = JSON.parse(localStorage.getItem("user") || "{}");
@@ -47,9 +48,9 @@ const AnimatedRoutes = () => {
           <Route index element={<Home />} />
           <Route path="search" element={<Search />} />
           <Route path="library" element={<Library />} />
+          <Route path="archive/:year/:season" element={<ArchiveSelected />} />
           <Route path="*" element={<Navigate to="/main" replace />} />
         </Route>
-
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </AnimatePresence>

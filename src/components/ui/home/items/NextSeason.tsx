@@ -36,12 +36,18 @@ const NextSeason = () => {
       if (!data.data) {
         throw new Error("No data found in the response.");
       }
-      const animeData = data.data.map((item: any) => ({
-        id: item.mal_id,
-        title: item.title,
-        imageUrl: item.images.jpg.image_url,
-        genres: item.genres.map((genre: any) => genre.name),
-      }));
+      const uniqueAnimeMap = new Map<number, Anime>();
+      data.data.forEach((item: any) => {
+        if (!uniqueAnimeMap.has(item.mal_id)) {
+          uniqueAnimeMap.set(item.mal_id, {
+            id: item.mal_id,
+            title: item.title,
+            imageUrl: item.images.jpg.image_url,
+            genres: item.genres.map((genre: any) => genre.name),
+          });
+        }
+      });
+      const animeData = Array.from(uniqueAnimeMap.values());
       setAnimeList(animeData);
       setTotalPages(data.pagination.last_visible_page);
       setCurrentPage(page);
