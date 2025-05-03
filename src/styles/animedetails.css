@@ -1,24 +1,24 @@
-.anime-detail {
+.anime-detail_detail {
   max-width: 1200px;
   margin: 2rem auto;
   padding: 0 1rem;
 }
 
-.anime-header {
+.anime-header_detail {
   display: flex;
   gap: 2rem;
   margin-bottom: 2rem;
 }
 
-.anime-image img {
+.anime-image_detail img {
   width: 300px;
   height: auto;
   border: 6px solid #000;
   box-shadow: 12px 12px 0 #9333ea;
 }
 
-.info-card,
-.details-card {
+.info-card_detail,
+.details-card_detail {
   background: #fff;
   border: 6px solid #000;
   box-shadow: 12px 12px 0 #9333ea;
@@ -27,7 +27,7 @@
   transition: box-shadow 0.3s;
 }
 
-.cardtitle {
+.cardtitle_detail {
   font-size: 2rem;
   font-weight: 900;
   color: #000;
@@ -38,7 +38,7 @@
   overflow: hidden;
 }
 
-.cardtitle::after {
+.cardtitle_detail::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -50,17 +50,17 @@
   transition: transform 0.3s;
 }
 
-.cardtitle:hover::after {
+.cardtitle_detail:hover::after {
   transform: translateX(0);
 }
 
-.cardcontent {
+.cardcontent_detail {
   font-size: 1rem;
   line-height: 1.6;
   color: #000;
 }
 
-.cardcontent p {
+.cardcontent_detail p {
   margin: 0.8rem 0;
 }
 

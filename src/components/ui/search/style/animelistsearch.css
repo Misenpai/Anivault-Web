@@ -1,0 +1,31 @@
+.top-airing-anime-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.listContainer {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: 16px;
+  padding: 16px 0;
+  width: 100%;
+  max-height: 300px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.listContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.animeItem {
+  flex: 0 0 200px;
+  height: 280px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

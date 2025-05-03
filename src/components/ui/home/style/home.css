@@ -1,0 +1,13 @@
+.home-container {
+  width: 100vw;
+  margin: 0;
+  padding: 16px;
+  overflow-x: visible;
+  overflow-y: visible;
+  box-sizing: border-box;
+  min-height: 100%;
+
+  @media (max-width: 768px) {
+    padding: 8px;
+  }
+}

@@ -13,15 +13,18 @@ import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import Main from "./components/ui/Main";
 import Home from "./components/ui/home/Home";
-import "./styles/app.css";
 import Search from "./components/ui/search/Search";
 import Library from "./components/ui/library/Library";
 import ArchiveSelected from "./components/ui/home/ArchiveSelected";
 import AnimeDetail from "./components/AnimeDetails";
+import "./styles/app.css";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const userString = localStorage.getItem("user");
+  const user = userString ? JSON.parse(userString) : {};
+
   if (!user || !user.token) {
+    console.log("Protected route: No user token found, redirecting to login");
     return <Navigate to="/login" replace />;
   }
   return <>{children}</>;

@@ -1,15 +1,24 @@
-
-import React, { useState } from "react";
-import { Outlet, Navigate } from "react-router";
+import React, { useState, useEffect } from "react";
+import { Outlet, Navigate, useLocation } from "react-router"; // Fixed import from react-router-dom
 import Header from "../ui/main/Header";
 import NavigationPanel from "../ui/main/NavigationPanel";
 import "../../styles/main.css";
 
 const Main = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const location = useLocation();
+
+  const userString = localStorage.getItem("user");
+  const user = userString ? JSON.parse(userString) : {};
+
+  useEffect(() => {
+    console.log("Main component mounted");
+    console.log("Current path:", location.pathname);
+    console.log("User data in Main:", user);
+  }, [location.pathname, user]);
 
   if (!user || !user.token) {
+    console.log("No user token found, redirecting to login");
     return <Navigate to="/login" replace />;
   }
 

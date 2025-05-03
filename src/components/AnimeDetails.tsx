@@ -84,14 +84,14 @@ const AnimeDetail: React.FC = () => {
   if (!anime) return <div>No anime found.</div>;
 
   return (
-    <div className="anime-detail">
-      <div className="anime-header">
-        <div className="anime-image">
+    <div className="anime-detail_detail">
+      <div className="anime-header_detail">
+        <div className="anime-image_detail">
           <img src={anime.images.jpg.large_image_url} alt={anime.title} />
         </div>
-        <div className="info-card">
-          <span className="cardtitle">{anime.title}</span>
-          <div className="cardcontent">
+        <div className="info-card_detail">
+          <span className="cardtitle_detail">{anime.title}</span>
+          <div className="cardcontent_detail">
             <p>
               <strong>Japanese Title:</strong> {anime.title_japanese || "N/A"}
             </p>
@@ -130,8 +130,8 @@ const AnimeDetail: React.FC = () => {
         </div>
       </div>
 
-      <div className="details-card">
-        <div className="cardcontent">
+      <div className="details-card_detail">
+        <div className="cardcontent_detail">
           <p>
             <strong>English Title:</strong> {anime.title_english || "N/A"}
           </p>
@@ -162,7 +162,7 @@ const AnimeDetail: React.FC = () => {
           </p>
 
           <div className="section">
-            <span className="cardtitle">Openings</span>
+            <span className="cardtitle_detail">Openings</span>
             <ul>
               {anime.theme.openings.length > 0 ? (
                 anime.theme.openings.map((op, i) => <li key={i}>{op}</li>)
@@ -173,7 +173,7 @@ const AnimeDetail: React.FC = () => {
           </div>
 
           <div className="section">
-            <span className="cardtitle">Endings</span>
+            <span className="cardtitle_detail">Endings</span>
             <ul>
               {anime.theme.endings.length > 0 ? (
                 anime.theme.endings.map((ed, i) => <li key={i}>{ed}</li>)
@@ -184,7 +184,7 @@ const AnimeDetail: React.FC = () => {
           </div>
 
           <div className="section">
-            <span className="cardtitle">Relations</span>
+            <span className="cardtitle_detail">Relations</span>
             {anime.relations.length > 0 ? (
               anime.relations.map((rel, i) => (
                 <p key={i}>
@@ -199,7 +199,7 @@ const AnimeDetail: React.FC = () => {
 
           {anime.trailer.url && (
             <div className="section">
-              <span className="cardtitle">Trailer</span>
+              <span className="cardtitle_detail">Trailer</span>
               <iframe
                 width="100%"
                 height="400"

@@ -1,4 +1,4 @@
-/* src/styles/header.css */
+
 
 .app-header {
   display: flex;
@@ -7,7 +7,8 @@
   height: 60px;
   padding: 0 20px;
   width: 100%;
-  /* No background as per requirement */
+  position: relative;
+  z-index: 100;
 }
 
 .header-left {
@@ -29,6 +30,8 @@
   flex: 1;
   display: flex;
   justify-content: center;
+  position: relative;
+  z-index: 101;
 }
 
 .logo-container {
@@ -59,6 +62,8 @@
   display: flex;
   align-items: center;
   gap: 15px;
+  position: relative;
+  z-index: 101;
 }
 
 .profile-button,
@@ -70,4 +75,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.profile-icon {
+  min-width: 32px;
+  min-height: 32px;
+}
+
+.logout-button {
+  min-width: 60px;
+  min-height: 32px;
 }
