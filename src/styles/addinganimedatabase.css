@@ -1,0 +1,106 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.add-anime-modal {
+  background-color: #2a2a2a;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  color: white;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.status-selection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.status-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #3a3a3a;
+  color: white;
+  cursor: pointer;
+}
+
+.status-button.selected {
+  background-color: #8a2be2;
+}
+
+.status-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.episode-selection {
+  margin-bottom: 20px;
+}
+
+.episode-scroller {
+  display: flex;
+  overflow-x: auto;
+  gap: 8px;
+  padding: 10px 0;
+  margin: 10px 0;
+}
+
+.episode-item {
+  padding: 8px 12px;
+  background-color: #3a3a3a;
+  border-radius: 5px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.episode-item.selected {
+  background-color: #8a2be2;
+}
+
+.episode-count {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.save-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #8a2be2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.save-button:disabled {
+  background-color: #4a4a4a;
+  cursor: not-allowed;
+}

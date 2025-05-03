@@ -1,9 +1,11 @@
-// src/components/AnimeDetail.tsx
+
 
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import JIKAN_API_BASE_URL from "../config/configjikan";
 import "../styles/animedetails.css";
+import { AnimeStatusData, saveAnimeStatus } from "../services/api";
+import AddingAnimeDatabase from "./AddingAnimeDatabase";
 
 interface Anime {
   mal_id: number;
@@ -60,6 +62,18 @@ const AnimeDetail: React.FC = () => {
   const [anime, setAnime] = useState<Anime | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [showAddModal, setShowAddModal] = useState(false);
+
+  const handleAddClick = () => setShowAddModal(true);
+  const handleCloseModal = () => setShowAddModal(false);
+  const handleSaveAnime = async (data: AnimeStatusData) => {
+    try {
+      await saveAnimeStatus(data);
+      alert("Anime status saved successfully!");
+    } catch (error) {
+      alert(error instanceof Error ? error.message : "Failed to save");
+    }
+  };
 
   useEffect(() => {
     const fetchAnimeDetail = async () => {
@@ -215,11 +229,21 @@ const AnimeDetail: React.FC = () => {
       </div>
       <button
         className="add-button_detail archive-button_detail"
-        onClick={() => console.log("Add button clicked")}
+        onClick={handleAddClick}
         aria-label="Add to list"
       >
         Add
       </button>
+      {showAddModal && (
+        <AddingAnimeDatabase
+          mal_id={anime.mal_id}
+          title={anime.title}
+          episodes={anime.episodes}
+          status={anime.status}
+          onClose={handleCloseModal}
+          onSave={handleSaveAnime}
+        />
+      )}
     </div>
   );
 };
