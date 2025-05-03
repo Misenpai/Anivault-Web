@@ -213,6 +213,13 @@ const AnimeDetail: React.FC = () => {
           )}
         </div>
       </div>
+      <button
+        className="add-button_detail archive-button_detail"
+        onClick={() => console.log("Add button clicked")}
+        aria-label="Add to list"
+      >
+        Add
+      </button>
     </div>
   );
 };

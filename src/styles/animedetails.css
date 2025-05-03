@@ -99,3 +99,55 @@ iframe {
     font-size: 1.5rem;
   }
 }
+
+.add-button_detail {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 12px 24px;
+  background: #fff;
+  border: 3px solid #000;
+  box-shadow: 6px 6px 0 #9333ea;
+  transition: transform 0.3s, box-shadow 0.3s, color 0.3s;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.add-button_detail::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  transform: translateY(100%);
+  transition: transform 0.3s;
+  z-index: -1;
+}
+
+.add-button_detail:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0 #9333ea;
+  color: #fff;
+}
+
+.add-button_detail:hover::before {
+  transform: translateY(0);
+}
+
+.add-button_detail:active {
+  transform: translate(0, 0);
+  box-shadow: 6px 6px 0 #000;
+}
+
+@media (max-width: 768px) {
+  .add-button {
+    padding: 8px 16px;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 0.9rem;
+  }
+}
