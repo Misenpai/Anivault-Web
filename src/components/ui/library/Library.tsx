@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const Library = () => {
-  return (
-    <div>Library</div>
-  )
-}
+  return <div>Library</div>;
+};
 
-export default Library
+export default Library;

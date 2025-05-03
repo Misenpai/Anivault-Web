@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import JIKAN_API_BASE_URL from "../config/configjikan";

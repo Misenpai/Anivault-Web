@@ -84,39 +84,33 @@ const userSignup = async (
 };
 
 const updateAnimeStatus = async (data: AnimeStatusUpdateData) => {
-  try {
-    const response = await api.put<{ message: string }>(
-      "user/anime/status",
-      new URLSearchParams({
-        user_id: data.user_id.toString(),
-        mal_id: data.mal_id.toString(),
-        total_watched_episodes: data.total_watched_episodes.toString(),
-        status: data.status,
-      })
-    );
-    return response.data;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      throw new Error(error.response?.data?.message || "Update failed");
-    }
-    throw new Error("Network error");
-  }
+  const response = await api.put<{ message: string }>(
+    "user/anime/status",
+    new URLSearchParams({
+      user_id: data.user_id.toString(),
+      mal_id: data.mal_id.toString(),
+      total_watched_episodes: data.total_watched_episodes.toString(),
+      status: data.status,
+    })
+  );
+  return response.data;
 };
 
 const saveAnimeStatus = async (data: AnimeStatusData) => {
   try {
-    // First, try to update the existing status
     const updateData: AnimeStatusUpdateData = {
       user_id: data.user_id,
       mal_id: data.mal_id,
       total_watched_episodes: data.total_watched_episodes,
       status: data.status,
     };
+    console.log("Attempting to update anime status:", updateData);
     const updateResponse = await updateAnimeStatus(updateData);
+    console.log("Update successful:", updateResponse);
     return updateResponse;
   } catch (error) {
-    // If update fails with 404 (record not found), try to insert
-    if (error instanceof Error && error.message.includes("404")) {
+    if (error instanceof AxiosError && error.response?.status === 404) {
+      console.log("No existing record found, attempting to insert...");
       try {
         const insertResponse = await api.post<{ message: string }>(
           "user/anime/status",
@@ -129,18 +123,25 @@ const saveAnimeStatus = async (data: AnimeStatusData) => {
             status: data.status,
           })
         );
+        console.log("Insert successful:", insertResponse.data);
         return insertResponse.data;
       } catch (insertError) {
+        console.error("Insert error:", insertError);
         if (insertError instanceof AxiosError) {
           throw new Error(
-            insertError.response?.data?.message || "Insert failed"
+            insertError.response?.data?.message ||
+              "Failed to insert anime status"
           );
         }
         throw new Error("Network error during insert");
       }
+    } else if (error instanceof AxiosError) {
+      throw new Error(
+        error.response?.data?.message || "Failed to update anime status"
+      );
+    } else {
+      throw new Error("Network error during update");
     }
-    // Re-throw other errors
-    throw error;
   }
 };
 
