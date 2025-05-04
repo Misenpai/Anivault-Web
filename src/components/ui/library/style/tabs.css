@@ -1,116 +1,212 @@
-/* watching.css */
+.card {
+  width: calc(100% - 40px);
+  padding: 20px;
+  background: #fff;
+  border: 6px solid #000;
+  box-shadow: 12px 12px 0 #c938ec;
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.card:hover {
+  transform: translate(-5px, -5px);
+  box-shadow: 17px 17px 0 #c938ec;
+}
+
+.card__image-container {
+  min-width: 120px;
+  max-width: 120px;
+  height: 170px;
+  margin-right: 20px;
+  border: 3px solid #000;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.card__info-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.card__title {
+  font-size: 18px;
+  font-weight: 900;
+  color: #000;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.card__title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 90%;
+  height: 3px;
+  background-color: #000;
+  transform: translateX(-100%);
+  transition: transform 0.3s;
+}
+
+.card:hover .card__title::after {
+  transform: translateX(0);
+}
+
+.card__content {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #000;
+  margin-bottom: 15px;
+}
+
+.card__progress {
+  margin-bottom: 15px;
+}
+
+.progress-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  border: none;
+  border-radius: 4px;
+  background-color: #eee;
+}
+
+.progress-bar::-webkit-progress-value {
+  background-color: #000;
+  border-radius: 4px;
+}
+
+.episode-count {
+  font-size: 14px;
+  color: #000;
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+.card__form {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+  max-width: 200px;
+}
+
+.card__button {
+  flex: 1;
+  border: 3px solid #000;
+  background: #000;
+  color: #fff;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card__button::before {
+  content: "Add+";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 105%;
+  background-color: #5ad641;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(100%);
+  transition: transform 0.3s;
+}
+
+.card__button:hover::before {
+  transform: translateY(0);
+}
+
+.card__button:active {
+  transform: scale(0.95);
+}
+
+.card__button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.card__button:disabled:hover::before {
+  transform: translateY(100%);
+}
+
+.delete-button::before {
+  content: "Delete";
+  background-color: #e63946;
+  color: #fff;
+}
+
 .tab-content {
-  padding: 2rem;
+  height: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .tab-title {
   font-size: 1.8rem;
   color: #fff;
   margin-bottom: 1.5rem;
-}
-
-.anime-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.5rem;
-}
-
-.anime-card {
-  background-color: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.anime-card:hover {
-  transform: translateY(-5px);
-}
-
-.anime-image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  cursor: pointer;
-}
-
-.anime-title {
-  font-size: 1.2rem;
-  color: #333;
-  margin: 1rem;
   font-weight: 600;
 }
 
-.anime-details {
-  padding: 0 1rem;
-  font-size: 0.9rem;
-  color: #666;
-}
-
-.progress-container {
-  padding: 1rem;
-}
-
-.progress-bar {
-  width: 100%;
-  height: 8px;
-  border-radius: 4px;
-  background-color: #e0e0e0;
-}
-
-.progress-bar::-webkit-progress-value {
-  background-color: #8a2be2;
-  border-radius: 4px;
-}
-
-.progress-bar::-moz-progress-bar {
-  background-color: #8a2be2;
-  border-radius: 4px;
-}
-
-.progress-container p {
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
-  color: #333;
-}
-
-.action-buttons {
+.anime-list-container {
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
-  gap: 0.5rem;
-  padding: 1rem;
-}
-
-.action-button {
-  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
   padding: 0.5rem;
-  font-size: 0.9rem;
-  border: none;
-  border-radius: 4px;
-  background-color: #8a2be2;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+.anime-list-container {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-.action-button:hover {
-  background-color: #6a1bb2;
-}
-
-.action-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.delete-button {
-  background-color: #e63946;
-}
-
-.delete-button:hover {
-  background-color: #b32d38;
+.anime-list-container::-webkit-scrollbar {
+  display: none;
 }
 
 .error-message {
   color: #e63946;
   text-align: center;
   margin: 1rem 0;
+  font-weight: 500;
 }

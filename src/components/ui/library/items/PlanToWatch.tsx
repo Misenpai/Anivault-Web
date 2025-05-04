@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { FiTrash2, FiPlus } from "react-icons/fi";
 import {
   AnimeDetails,
   AnimeStatusData,
@@ -31,7 +32,7 @@ const PlanToWatch: React.FC = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const statusData = await readAnimeStatus(userId, "Plan to Watch");
+      const statusData = await readAnimeStatus(userId, "PlantoWatch");
       const animeWithDetails: AnimeStatusDataWithDetails[] = [];
       for (const anime of statusData) {
         try {
@@ -113,58 +114,74 @@ const PlanToWatch: React.FC = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
     >
-      <h2 className="tab-title">Plan to Watch ({animeList.length})</h2>
+      <h2 className="tab-title">Plan To Watch ({animeList.length})</h2>
       {isLoading && <RevolvingProgressBar />}
       {error && <p className="error-message">{error}</p>}
-      <div className="anime-grid">
+
+      <div className="anime-list-container">
         {animeList.map((anime) => (
           <motion.div
             key={anime.statusData.mal_id}
-            className="anime-card"
-            initial={{ scale: 0.9 }}
+            className="card"
+            initial={{ scale: 0.95 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 200, damping: 20 }}
           >
-            <img
-              src={anime.details.images.jpg.image_url}
-              alt={anime.statusData.anime_name}
-              className="anime-image"
-              onClick={() => handleItemClick(anime.statusData.mal_id)}
-            />
-            <h3 className="anime-title">{anime.statusData.anime_name}</h3>
-            <div className="anime-details">
-              <p>Type: {anime.details.type}</p>
-              <p>Season: {anime.details.season}</p>
-              <p>Year: {anime.details.year}</p>
-            </div>
-            <div className="progress-container">
-              <progress
-                value={anime.statusData.total_watched_episodes}
-                max={anime.statusData.total_episodes}
-                className="progress-bar"
+            <div className="card__image-container">
+              <img
+                src={anime.details.images.jpg.image_url}
+                alt={anime.statusData.anime_name}
+                className="card__image"
+                onClick={() => handleItemClick(anime.statusData.mal_id)}
               />
-              <p>
-                {anime.statusData.total_watched_episodes} /{" "}
-                {anime.statusData.total_episodes} episodes
-              </p>
             </div>
-            <div className="action-buttons">
-              <button
-                className="action-button"
-                onClick={() => handleUpdateEpisodes(anime)}
-                disabled={
-                  anime.statusData.total_watched_episodes >=
-                  anime.statusData.total_episodes
-                }
+
+            <div className="card__info-container">
+              <span
+                className="card__title"
+                onClick={() => handleItemClick(anime.statusData.mal_id)}
               >
-                Start Watching
-              </button>
-              <button
-                className="action-button delete-button"
-                onClick={() => handleDelete(anime.statusData.mal_id)}
-              >
-                Delete
-              </button>
+                {anime.statusData.anime_name}
+              </span>
+
+              <p className="card__content">
+                Type: {anime.details.type} <br />
+                Season: {anime.details.season} <br />
+                Year: {anime.details.year}
+              </p>
+
+              <div className="card__progress">
+                <div className="progress-container">
+                  <progress
+                    value={anime.statusData.total_watched_episodes}
+                    max={anime.statusData.total_episodes}
+                    className="progress-bar"
+                  />
+                  <p className="episode-count">
+                    {anime.statusData.total_watched_episodes} /{" "}
+                    {anime.statusData.total_episodes} ep
+                  </p>
+                </div>
+              </div>
+
+              <div className="card__form">
+                <button
+                  className="card__button"
+                  onClick={() => handleUpdateEpisodes(anime)}
+                  disabled={
+                    anime.statusData.total_watched_episodes >=
+                    anime.statusData.total_episodes
+                  }
+                >
+                  <FiPlus size={20} />
+                </button>
+                <button
+                  className="card__button delete-button"
+                  onClick={() => handleDelete(anime.statusData.mal_id)}
+                >
+                  <FiTrash2 size={20} />
+                </button>
+              </div>
             </div>
           </motion.div>
         ))}

@@ -1,14 +1,6 @@
-:root {
-  --font-color-dark: #323232;
-  --font-color-light: #fff;
-  --main-color: #323232;
-  --border-radius: 8px;
-}
-
 .library-container {
-  max-width: 1200px;
+  max-width: 1500px;
   margin: 0 auto;
-  padding: 2rem;
   background-color: #transparent;
   min-height: 100vh;
 }
