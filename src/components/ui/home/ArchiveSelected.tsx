@@ -112,7 +112,7 @@ const ArchiveSelected: React.FC = () => {
               <div
                 key={anime.id}
                 className="anime-item"
-                onClick={() => navigate(`/main/anime/${anime.id}`)}
+                onClick={() => navigate(`/anime/${anime.id}`)}
                 role="button"
                 tabIndex={0}
               >

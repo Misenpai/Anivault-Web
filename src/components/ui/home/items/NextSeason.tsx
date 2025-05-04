@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getNextSeasonInfo } from "../../../../services/seasonUtils";
 import JIKAN_API_BASE_URL from "../../../../config/configjikan";
+import { useNavigate } from "react-router";
 
 interface Anime {
   id: number;
@@ -15,6 +16,7 @@ const NextSeason = () => {
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const navigate = useNavigate();
 
   const delay = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms));
@@ -91,7 +93,12 @@ const NextSeason = () => {
       <h2>This Season</h2>
       <div className="anime-grid">
         {animeList.map((anime) => (
-          <div key={anime.id} className="anime-item">
+          <div
+            key={anime.id}
+            className="anime-item"
+            onClick={() => navigate(`/anime/${anime.id}`)}
+            style={{ cursor: "pointer" }}
+          >
             <img src={anime.imageUrl} alt={`${anime.title} poster`} />
             <h3 className="anime-title">{anime.title}</h3>
             <p className="anime-genres">{anime.genres.join(", ")}</p>

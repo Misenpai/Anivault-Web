@@ -10,6 +10,7 @@ import {
 import RevolvingProgressBar from "../../../RevolvingProgressBar";
 import "../style/tabs.css";
 import { FiTrash2 } from "react-icons/fi";
+import { useNavigate } from "react-router";
 
 interface AnimeStatusDataWithDetails {
   statusData: AnimeStatusData;
@@ -22,6 +23,7 @@ const Completed: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const user = JSON.parse(localStorage.getItem("user") || "{}");
   const userId = user?.id;
+  const navigate = useNavigate();
 
   const fetchAnimeList = async () => {
     if (!userId) {
@@ -70,7 +72,7 @@ const Completed: React.FC = () => {
 
   const handleItemClick = (mal_id: number) => {
     // Placeholder: Navigate to anime details page
-    alert(`Navigate to anime details for MAL ID: ${mal_id}`);
+    navigate(`/anime/${mal_id}`);
   };
 
   useEffect(() => {

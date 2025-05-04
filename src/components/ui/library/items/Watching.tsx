@@ -11,6 +11,7 @@ import {
 } from "../../../../services/api";
 import RevolvingProgressBar from "../../../RevolvingProgressBar";
 import "../style/tabs.css";
+import { useNavigate } from "react-router";
 
 interface AnimeStatusDataWithDetails {
   statusData: AnimeStatusData;
@@ -23,6 +24,7 @@ const Watching: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const user = JSON.parse(localStorage.getItem("user") || "{}");
   const userId = user?.id;
+  const navigate = useNavigate();
 
   const fetchAnimeList = async () => {
     if (!userId) {
@@ -97,7 +99,7 @@ const Watching: React.FC = () => {
   };
 
   const handleItemClick = (mal_id: number) => {
-    alert(`Navigate to anime details for MAL ID: ${mal_id}`);
+    navigate(`/anime/${mal_id}`);
   };
 
   useEffect(() => {
