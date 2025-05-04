@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import JIKAN_API_BASE_URL from "../../../config/configjikan";
 import "./style/archiveSelected.css";
+import RevolvingProgressBar from "../../RevolvingProgressBar";
 
 interface Anime {
   id: number;
@@ -91,8 +92,11 @@ const ArchiveSelected: React.FC = () => {
 
   if (loading)
     return (
-      <div className="loading">
-        Loading {season} {year}…
+      <div
+        className="loading"
+        style={{ display: "flex", justifyContent: "center", padding: 20 }}
+      >
+        <RevolvingProgressBar />
       </div>
     );
   if (error) return <div className="error">Error: {error}</div>;

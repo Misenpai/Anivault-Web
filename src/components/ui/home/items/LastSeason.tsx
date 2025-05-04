@@ -3,6 +3,7 @@ import "../style/lastseason.css";
 import { useNavigate } from "react-router";
 import JIKAN_API_BASE_URL from "../../../../config/configjikan";
 import { getPreviousSeasonInfo } from "../../../../services/seasonUtils";
+import RevolvingProgressBar from "../../../RevolvingProgressBar";
 
 interface Anime {
   id: number;
@@ -40,13 +41,13 @@ const LastSeason = () => {
         throw new Error("No data found in the response.");
       }
       const uniqueAnimeMap = new Map<number, Anime>();
-      data.data.forEach((item: any) => {
+      data.data.forEach((item: { mal_id: number; title: string; images: { jpg: { image_url: string } }; genres: { name: string }[] }) => {
         if (!uniqueAnimeMap.has(item.mal_id)) {
           uniqueAnimeMap.set(item.mal_id, {
             id: item.mal_id,
             title: item.title,
             imageUrl: item.images.jpg.image_url,
-            genres: item.genres.map((genre: any) => genre.name),
+            genres: item.genres.map((genre: { name: string }) => genre.name),
           });
         }
       });
@@ -86,7 +87,15 @@ const LastSeason = () => {
     }
   };
 
-  if (loading) return <div className="loading">Loading...</div>;
+  if (loading)
+    return (
+      <div
+        className="loading"
+        style={{ display: "flex", justifyContent: "center", padding: 20 }}
+      >
+        <RevolvingProgressBar />
+      </div>
+    );
   if (error) return <div className="error">Error: {error}</div>;
 
   return (

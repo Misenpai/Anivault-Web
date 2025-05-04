@@ -33,13 +33,13 @@ const Completed: React.FC = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const statusData = await readAnimeStatus(userId, "Completed"); // Fixed status
+      const statusData = await readAnimeStatus(userId, "Completed");
       const animeWithDetails: AnimeStatusDataWithDetails[] = [];
       for (const anime of statusData) {
         try {
           const details = await getAnimeDetails(anime.mal_id);
           animeWithDetails.push({ statusData: anime, details });
-          await new Promise((resolve) => setTimeout(resolve, 1000)); // Rate limit
+          await new Promise((resolve) => setTimeout(resolve, 1000));
         } catch (err) {
           console.error(
             `Error fetching details for anime ${anime.mal_id}:`,
@@ -64,14 +64,13 @@ const Completed: React.FC = () => {
     }
     try {
       await removeAnimeStatus(userId, mal_id);
-      fetchAnimeList(); // Refresh list
+      fetchAnimeList();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to delete anime");
     }
   };
 
   const handleItemClick = (mal_id: number) => {
-    // Placeholder: Navigate to anime details page
     navigate(`/anime/${mal_id}`);
   };
 
@@ -81,64 +80,59 @@ const Completed: React.FC = () => {
 
   return (
     <motion.div
-      className="tab-content"
+      className="tab-contentLibrary"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
     >
-      <h2 className="tab-title">Completed ({animeList.length})</h2>
+      <h2 className="tab-titleLibrary">Completed ({animeList.length})</h2>
       {isLoading && <RevolvingProgressBar />}
-      {error && <p className="error-message">{error}</p>}
-
-      <div className="anime-list-container">
+      {error && <p className="error-messageLibrary">{error}</p>}
+      <div className="anime-list-containerLibrary">
         {animeList.map((anime) => (
           <motion.div
             key={anime.statusData.mal_id}
-            className="card"
+            className="cardLibrary"
             initial={{ scale: 0.95 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 200, damping: 20 }}
           >
-            <div className="card__image-container">
+            <div className="card__image-containerLibrary">
               <img
                 src={anime.details.images.jpg.image_url}
                 alt={anime.statusData.anime_name}
-                className="card__image"
+                className="card__imageLibrary"
                 onClick={() => handleItemClick(anime.statusData.mal_id)}
               />
             </div>
-
-            <div className="card__info-container">
+            <div className="card__info-containerLibrary">
               <span
-                className="card__title"
+                className="card__titleLibrary"
                 onClick={() => handleItemClick(anime.statusData.mal_id)}
               >
                 {anime.statusData.anime_name}
               </span>
-
-              <p className="card__content">
+              <p className="card__contentLibrary">
                 Type: {anime.details.type} <br />
                 Season: {anime.details.season} <br />
                 Year: {anime.details.year}
               </p>
-
-              <div className="card__progress">
-                <div className="progress-container">
+              <div className="card__progressLibrary">
+                <div className="progress-containerLibrary">
                   <progress
                     value={anime.statusData.total_watched_episodes}
                     max={anime.statusData.total_episodes}
-                    className="progress-bar"
+                    className="progress-barLibrary"
                   />
-                  <p className="episode-count">
+                  <p className="episode-countLibrary">
                     {anime.statusData.total_watched_episodes} /{" "}
                     {anime.statusData.total_episodes} ep
                   </p>
                 </div>
               </div>
-
-              <div className="card__form">
+              <div className="card__formLibrary">
                 <button
-                  className="card__button delete-button"
+                  className="card__buttonLibrary delete-buttonLibrary"
                   onClick={() => handleDelete(anime.statusData.mal_id)}
                 >
                   <FiTrash2 size={20} />

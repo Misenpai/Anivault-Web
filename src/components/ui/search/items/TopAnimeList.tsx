@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useMemo } from "react";
 import useJikanApi from "../../../../services/useJikanApi";
 import AnimeCard from "../AnimeCard";
 import "../style/animelistsearch.css";
+import RevolvingProgressBar from "../../../RevolvingProgressBar";
 
 interface Anime {
   mal_id: number;
@@ -14,14 +15,31 @@ const TopAnime: React.FC = () => {
     page: 1,
   });
 
+  const uniqueAnimeList = useMemo(() => {
+    const uniqueMap = new Map<number, Anime>();
+    data?.forEach((anime) => {
+      if (!uniqueMap.has(anime.mal_id)) {
+        uniqueMap.set(anime.mal_id, anime);
+      }
+    });
+    return Array.from(uniqueMap.values());
+  }, [data]);
+
   return (
     <div className="top-airing-anime-container">
       <h2>Top Anime</h2>
-      {loading && <p>Loading...</p>}
+      {loading && (
+        <div
+          className="loading"
+          style={{ display: "flex", justifyContent: "center", padding: 16 }}
+        >
+          <RevolvingProgressBar />
+        </div>
+      )}
       {error && <p>{error}</p>}
-      {data && (
+      {uniqueAnimeList && (
         <div className="listContainer">
-          {data.map((anime) => (
+          {uniqueAnimeList.map((anime) => (
             <div key={anime.mal_id} className="animeItem">
               <AnimeCard
                 anime={{

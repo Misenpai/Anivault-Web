@@ -1,5 +1,3 @@
-
-
 .app-header {
   display: flex;
   align-items: center;
@@ -11,19 +9,11 @@
   z-index: 100;
 }
 
-.header-left {
+.header-left,
+.header-right {
   display: flex;
   align-items: center;
-}
-
-.menu-toggle {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 5px;
-  margin-right: 15px;
+  gap: 15px;
 }
 
 .header-center {
@@ -32,11 +22,6 @@
   justify-content: center;
   position: relative;
   z-index: 101;
-}
-
-.logo-container {
-  display: flex;
-  align-items: center;
 }
 
 .logo-text {
@@ -58,31 +43,31 @@
   border-radius: 50%;
 }
 
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  position: relative;
-  z-index: 101;
-}
-
-.profile-button,
-.logout-button {
-  background: none;
-  border: none;
-  color: white;
+/* Button UI from Uiverse */
+.button {
+  --bg: #000;
+  --hover-bg: #ff90e8;
+  --hover-text: #000;
+  color: #fff;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: 1px solid var(--bg);
+  border-radius: 4px;
+  padding: 0.8em 2em;
+  background: var(--bg);
+  transition: 0.2s;
+  font-size: 1rem;
 }
 
-.profile-icon {
-  min-width: 32px;
-  min-height: 32px;
+.button:hover {
+  color: var(--hover-text);
+  transform: translate(-0.25rem, -0.25rem);
+  background: var(--hover-bg);
+  box-shadow: 0.25rem 0.25rem var(--bg);
 }
 
-.logout-button {
-  min-width: 60px;
-  min-height: 32px;
+.button:active {
+  transform: translate(0);
+  box-shadow: none;
 }
+
+/* Remove any legacy menu-toggle/logout-button styles if present */

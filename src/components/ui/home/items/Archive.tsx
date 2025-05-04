@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import JIKAN_API_BASE_URL from "../../../../config/configjikan";
 import "../style/archive.css";
+import RevolvingProgressBar from "../../../RevolvingProgressBar";
 
 interface SeasonItem {
   year: number;
@@ -33,7 +34,7 @@ const Archive = () => {
         throw new Error("No data found in the response.");
       }
       const sortedSeasons = data.data
-        .map((item: any) => ({
+        .map((item: { year: number; seasons: string[] }) => ({
           year: item.year,
           seasons: item.seasons,
         }))
@@ -54,9 +55,15 @@ const Archive = () => {
     navigate(`/main/archive/${year}/${season}`);
   };
 
-  if (loading) {
-    return <div className="loading">Loading...</div>;
-  }
+  if (loading)
+    return (
+      <div
+        className="loading"
+        style={{ display: "flex", justifyContent: "center", padding: 20 }}
+      >
+        <RevolvingProgressBar />
+      </div>
+    );
 
   if (error) {
     return (

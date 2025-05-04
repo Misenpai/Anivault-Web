@@ -2,6 +2,8 @@ import { useLocation } from "react-router";
 import { motion } from "framer-motion";
 import useJikanApi from "../../../../services/useJikanApi";
 import "../style/searchResult.css";
+import RevolvingProgressBar from "../../../RevolvingProgressBar";
+import { useNavigate } from "react-router";
 
 interface Anime {
   mal_id: number;
@@ -19,6 +21,7 @@ interface Anime {
 const SearchResults: React.FC = () => {
   const location = useLocation();
   const query = new URLSearchParams(location.search).get("q");
+  const navigate = useNavigate();
 
   // Call the hook unconditionally at the top
   const { data, loading, error } = useJikanApi<Anime[]>(
@@ -31,9 +34,15 @@ const SearchResults: React.FC = () => {
     return <div className="error-message">No search query provided.</div>;
   }
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  if (loading)
+    return (
+      <div
+        className="loading"
+        style={{ display: "flex", justifyContent: "center", padding: 20 }}
+      >
+        <RevolvingProgressBar />
+      </div>
+    );
 
   if (error) {
     return <div className="error-message">Error: {error}</div>;
@@ -62,21 +71,13 @@ const SearchResults: React.FC = () => {
                   src={anime.images.jpg.image_url}
                   alt={anime.title}
                   className="card__image"
-                  onClick={() =>
-                    alert(
-                      `Navigate to anime details for MAL ID: ${anime.mal_id}`
-                    )
-                  }
+                  onClick={() => navigate(`/anime/${anime.mal_id}`)}
                 />
               </div>
               <div className="card__info-container">
                 <span
                   className="card__title"
-                  onClick={() =>
-                    alert(
-                      `Navigate to anime details for MAL ID: ${anime.mal_id}`
-                    )
-                  }
+                  onClick={() => navigate(`/anime/${anime.mal_id}`)}
                 >
                   {anime.title}
                 </span>
