@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Outlet, Navigate, useLocation } from "react-router"; // Fixed import from react-router-dom
+import { Outlet, Navigate, useLocation } from "react-router";
 import Header from "../ui/main/Header";
 import NavigationPanel from "../ui/main/NavigationPanel";
 import "../../styles/main.css";

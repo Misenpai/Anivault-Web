@@ -5,7 +5,7 @@ import NavbarLibrary from "./NavbarLibrary";
 import Watching from "./items/Watching";
 import Completed from "./items/Completed";
 import PlanToWatch from "./items/PlanToWatch";
-import Dropped from "./items/Dropped"; // Fixed import
+import Dropped from "./items/Dropped";
 import "./style/library.css";
 
 const Library: React.FC = () => {

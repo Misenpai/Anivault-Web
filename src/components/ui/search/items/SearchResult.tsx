@@ -23,7 +23,6 @@ const SearchResults: React.FC = () => {
   const query = new URLSearchParams(location.search).get("q");
   const navigate = useNavigate();
 
-  // Call the hook unconditionally at the top
   const { data, loading, error } = useJikanApi<Anime[]>(
     "anime",
     query ? { q: query } : {}

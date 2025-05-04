@@ -182,15 +182,11 @@ const saveAnimeStatus = async (data: AnimeStatusData) => {
     console.log("Attempting to update anime status:", updateData);
 
     try {
-      // First try to update
       const updateResponse = await updateAnimeStatus(updateData);
       console.log("Update successful:", updateResponse);
       return updateResponse;
     } catch (updateError) {
       console.log("Update failed:", updateError);
-
-      // If the anime doesn't exist (404) or any other error occurs during update,
-      // attempt to insert it as a new record
       console.log("Attempting to insert as new record...");
       const insertResponse = await api.post<{ message: string }>(
         "user/anime/status",

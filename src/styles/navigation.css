@@ -1,17 +1,17 @@
-/* Core panel styling */
+
 .navigation-panel {
   position: fixed;
   left: 20px;
   top: 20px;
   bottom: 20px;
   width: 250px;
-  background: #fff; /* Match card's white background */
-  border: 6px solid #000; /* Thick black border */
-  box-shadow: 12px 12px 0 #9333ea; /* Retro shadow */
+  background: #fff;
+  border: 6px solid #000;
+  box-shadow: 12px 12px 0 #9333ea;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
   z-index: 1001;
   transform: translateX(-120%);
-  border-radius: 15px; /* Retain slight rounding */
+  border-radius: 15px;
   overflow: hidden;
 }
 
@@ -19,25 +19,24 @@
   transform: translateX(0);
 }
 
-/* Only apply hover effects when panel is open */
+
 .navigation-panel.open:hover {
-  transform: translateX(0) translate(-5px, -5px); /* Card's hover lift */
-  box-shadow: 17px 17px 0 #9333ea; /* Larger shadow on hover */
+  transform: translateX(0) translate(-5px, -5px);
+  box-shadow: 17px 17px 0 #9333ea;
 }
 
-/* Header styling */
 .nav-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 15px;
-  border-bottom: 3px solid #000; /* Match card's bold lines */
-  background: #fff; /* Consistent with card */
+  border-bottom: 3px solid #000;
+  background: #fff;
 }
 
-/* Title styling */
+
 .nav-title {
-  font-size: 24px; /* Slightly smaller than card's 32px */
+  font-size: 24px;
   font-weight: 900;
   color: #000;
   text-transform: uppercase;
@@ -58,12 +57,12 @@
 }
 
 .navigation-panel.open:hover .nav-title::after {
-  transform: translateX(0); /* Slide-in underline on hover */
+  transform: translateX(0); 
 }
 
-/* Close button styling */
+
 .close-nav {
-  background: #000; /* Match card's button */
+  background: #000; 
   color: #fff;
   border: 3px solid #000;
   width: 30px;
@@ -78,14 +77,13 @@
 }
 
 .close-nav:hover {
-  transform: scale(1.05); /* Subtle scale on hover */
+  transform: scale(1.05);
 }
 
 .close-nav:active {
-  transform: scale(0.95); /* Tactile click feedback */
+  transform: scale(0.95); 
 }
 
-/* Navigation links */
 .main-nav {
   display: flex;
   flex-direction: column;
@@ -93,18 +91,18 @@
 }
 
 .nav-link {
-  color: #000; /* Black text for contrast */
+  color: #000; 
   text-decoration: none;
   padding: 15px 20px;
   display: block;
   font-size: 18px;
   font-weight: bold;
-  text-transform: uppercase; /* Match card's bold typography */
+  text-transform: uppercase; 
   transition: transform 0.3s, background-color 0.3s ease;
 }
 
 .nav-link:hover,
 .nav-link.active {
-  background-color: rgba(0, 0, 0, 0.1); /* Subtle hover/active state */
-  transform: scale(1.05); /* Match input's focus scale */
+  background-color: rgba(0, 0, 0, 0.1); 
+  transform: scale(1.05); 
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router"; // Fixed import from react-router-dom
+import { NavLink } from "react-router";
 import "../../../styles/navigation.css";
 
 interface NavigationPanelProps {
@@ -8,7 +8,6 @@ interface NavigationPanelProps {
 }
 
 const NavigationPanel = ({ isOpen, onClose }: NavigationPanelProps) => {
-  // Debug log
   console.log("NavigationPanel rendered, isOpen:", isOpen);
 
   return (

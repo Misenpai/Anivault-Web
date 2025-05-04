@@ -43,7 +43,6 @@
   border-radius: 50%;
 }
 
-/* Button UI from Uiverse */
 .button {
   --bg: #000;
   --hover-bg: #ff90e8;
@@ -70,4 +69,3 @@
   box-shadow: none;
 }
 
-/* Remove any legacy menu-toggle/logout-button styles if present */

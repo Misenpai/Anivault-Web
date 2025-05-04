@@ -18,7 +18,6 @@ const TopUpcomingAnime: React.FC = () => {
     { page: 1 }
   );
 
-  // Create unique anime list using Map
   const uniqueAnimeList = useMemo(() => {
     const uniqueMap = new Map<number, Anime>();
     data?.forEach((anime) => {
