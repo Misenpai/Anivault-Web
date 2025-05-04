@@ -48,7 +48,6 @@ const api = axios.create({
   },
 });
 
-// Add interceptor to include Authorization header
 api.interceptors.request.use((config) => {
   const user = JSON.parse(localStorage.getItem("user") || "{}");
   const token = user?.token;

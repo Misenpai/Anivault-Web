@@ -18,6 +18,7 @@ import Library from "./components/ui/library/Library";
 import ArchiveSelected from "./components/ui/home/ArchiveSelected";
 import AnimeDetail from "./components/AnimeDetails";
 import "./styles/app.css";
+import SearchResults from "./components/ui/search/items/SearchResult";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const userString = localStorage.getItem("user");
@@ -50,6 +51,7 @@ const AnimatedRoutes = () => {
         >
           <Route index element={<Home />} />
           <Route path="search" element={<Search />} />
+          <Route path="search/results" element={<SearchResults />} />
           <Route path="library" element={<Library />} />
           <Route path="archive/:year/:season" element={<ArchiveSelected />} />
           <Route path="*" element={<Navigate to="/main" replace />} />
